@@ -132,7 +132,7 @@ function Results({ data, filter, order, onChange }) {
             <div className="column is-2 is-hidden-mobile">
               <CatLogo />
             </div>
-            <div className="column">
+            <div className="column is-10">
               <Groups groups={data.groups} />
             </div>
           </div>

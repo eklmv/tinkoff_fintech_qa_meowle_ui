@@ -12,7 +12,7 @@
     "lint:js": "npx eslint src/* --ext .js,.jsx,.css",
     "version": "node scripts/update-version.js",
     "lint:format:fix": "prettier --config ./.prettierrc.yml \"src/**/*.{js,jsx,json,css,md}\" --write",
-    "codecept:run:local": "concurrently -k \"BROWSER=none npm run start:prod-api\" \"wait-on http://localhost:3000 && codeceptjs run --config codecept_config/codecept.conf.local.js\"",
+    "codecept:run:local": "concurrently -k --success=\"first\" \"BROWSER=none npm run start:prod-api\" \"wait-on http://localhost:3000 && codeceptjs run --config codecept_config/codecept.conf.local.js\"",
     "codecept:run:cli": "REACT_APP_UI_PROD=true codeceptjs run --config codecept_config/codecept.conf.cli.js"
   },
   "dependencies": {

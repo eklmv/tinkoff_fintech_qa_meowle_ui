@@ -10,5 +10,6 @@
 #root,
 html,
 body {
+  overflow-y: auto;
   height: 100%;
 }

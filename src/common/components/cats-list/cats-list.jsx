@@ -101,7 +101,7 @@ function NoResults({ text, name }) {
             </div>
             <br />
             <div className="control has-text-centered">
-              {name ? <AddCat name={name} /> : null}
+              {name.length < 35 ? <AddCat name={name} /> : null}
             </div>
           </div>
         </div>

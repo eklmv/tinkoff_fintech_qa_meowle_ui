@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ReactionApi } from '../../../../api/reaction';
-import { storage } from '../../../../utils/storage';
-import { notify } from '../../../../utils/notifications/notifications';
 import styles from './reaction-button.module.css';
 import { Icon } from '../../../../common/components/icon/icon';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
@@ -24,42 +21,11 @@ const countField = {
 export function ReactionButton({
   catInfo,
   type = 'like',
-  disabled,
-  setDisabled,
-  updateCatInfo,
+  reacted,
+  loading,
+  click,
 }) {
-  const storageMethod = {
-    like: storage.likes,
-    dislike: storage.dislikes,
-  }[type];
-  const [isReacted, updateReacted] = useState(storageMethod.exist(catInfo.id));
-  const [isLoading, setLoading] = useState(false);
-  const styleReacted =
-    isReacted && !isLoading ? styles['is-reacted'] : 'is-light';
-
-  const onClick = () => {
-    setLoading(true);
-    setDisabled(true);
-    ReactionApi.likes(catInfo.id, type, !isReacted)
-      .then(response => {
-        const storMethod = [storageMethod.set, storageMethod.remove][
-          Number(isReacted)
-        ];
-
-        storMethod(catInfo.id);
-        updateReacted(!isReacted);
-        updateCatInfo({
-          [countField[type]]: response[countField[type]],
-        });
-      })
-      .catch(message => {
-        notify.error(message);
-      })
-      .finally(() => {
-        setLoading(false);
-        setDisabled(false);
-      });
-  };
+  const styleReacted = reacted && !loading ? styles['is-reacted'] : 'is-light';
 
   return (
     <button
@@ -69,13 +35,13 @@ export function ReactionButton({
         styles['reaction-button'],
         styleReacted,
         {
-          'is-loading': isLoading,
+          'is-loading': loading,
         }
       )}
-      disabled={disabled}
+      disabled={loading}
       type="button"
       title={titleMap[type]}
-      onClick={onClick}
+      onClick={click}
     >
       <Icon icon={emojiMap[type]} />
       &nbsp;<span>{catInfo[countField[type]]}</span>
@@ -85,7 +51,7 @@ export function ReactionButton({
 ReactionButton.propTypes = {
   catInfo: PropTypes.object.isRequired,
   type: PropTypes.oneOf(['like', 'dislike']).isRequired,
-  disabled: PropTypes.bool.isRequired,
-  setDisabled: PropTypes.func.isRequired,
-  updateCatInfo: PropTypes.func.isRequired,
+  reacted: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  click: PropTypes.func.isRequired,
 };

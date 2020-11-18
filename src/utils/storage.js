@@ -21,6 +21,17 @@ export const storage = {
       removeFromStor('dislikes', catId);
     },
   },
+  reactions: {
+    exist(catId) {
+      return (getFromStor('reactions') || {})[catId] || null;
+    },
+    set(catId, reaction) {
+      setIntoStor('reactions', catId, reaction);
+    },
+    remove(catId) {
+      removeFromStor('reactions', catId);
+    },
+  },
 };
 
 function getFromStor(key) {

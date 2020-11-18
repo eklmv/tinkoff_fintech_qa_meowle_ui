@@ -12,6 +12,8 @@ import { Photos } from './components/photos/photos';
 import style from './profile.module.css';
 import { PhotosApi } from '../../api/photos';
 import { notify } from '../../utils/notifications/notifications';
+import { ReactionApi } from '../../api/reaction';
+import { storage } from '../../utils/storage';
 
 export function ProfilePage() {
   const match = useRouteMatch();
@@ -102,30 +104,73 @@ Info.propTypes = {
 };
 
 function Title({ catInfo, updateInfo }) {
-  const [disabled, updateDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [reactionType, setReactionType] = useState(
+    (storage.likes.exist(catInfo.id) && 'like') ||
+      (storage.dislikes.exist(catInfo.id) && 'dislike') ||
+      storage.reactions.exist(catInfo.id)
+  );
 
   const likes = updateInfo ? (
     <>
       <ReactionButton
         catInfo={catInfo}
         type="like"
-        disabled={disabled}
-        setDisabled={isDisabled => {
-          updateDisabled(isDisabled);
-        }}
-        updateCatInfo={updateInfo}
+        loading={loading}
+        reacted={reactionType === 'like'}
+        click={onLikeReacted}
       />
       <ReactionButton
         catInfo={catInfo}
         type="dislike"
-        disabled={disabled}
-        setDisabled={isDisabled => {
-          updateDisabled(isDisabled);
-        }}
-        updateCatInfo={updateInfo}
+        loading={loading}
+        reacted={reactionType === 'dislike'}
+        click={onDislikeReacted}
       />
     </>
   ) : null;
+
+  function onLikeReacted() {
+    sendReacted('like');
+  }
+
+  function onDislikeReacted() {
+    sendReacted('dislike');
+  }
+
+  function sendReacted(type) {
+    const reactions = {
+      [type]: reactionType !== type,
+    };
+    const inverseType = { like: 'dislike', dislike: 'like' }[type];
+
+    if (reactionType === inverseType) {
+      reactions[inverseType] = false;
+    }
+
+    setLoading(true);
+    ReactionApi.likes(catInfo.id, reactions)
+      .then(response => {
+        updateInfo(response);
+      })
+      .catch(message => {
+        notify.error(message);
+      })
+      .then(() => {
+        const newReaction = reactionType === type ? null : type;
+
+        setReactionType(newReaction);
+
+        if (newReaction) {
+          storage.reactions.set(catInfo.id, newReaction);
+        } else {
+          storage.reactions.remove(catInfo.id);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   return (
     <div className={classNames('title', 'is-3', style.title)}>

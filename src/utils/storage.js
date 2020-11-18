@@ -1,3 +1,7 @@
+import { runStoreMigrations } from './migrations';
+
+runStoreMigrations();
+
 export const storage = {
   likes: {
     exist(catId) {
@@ -19,6 +23,17 @@ export const storage = {
     },
     remove(catId) {
       removeFromStor('dislikes', catId);
+    },
+  },
+  reactions: {
+    exist(catId) {
+      return (getFromStor('reactions') || {})[catId] || null;
+    },
+    set(catId, reaction) {
+      setIntoStor('reactions', catId, reaction);
+    },
+    remove(catId) {
+      removeFromStor('reactions', catId);
     },
   },
 };

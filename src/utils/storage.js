@@ -1,3 +1,7 @@
+import { runStoreMigrations } from './migrations';
+
+runStoreMigrations();
+
 export const storage = {
   likes: {
     exist(catId) {

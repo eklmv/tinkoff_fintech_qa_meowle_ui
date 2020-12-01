@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './cat-tricky.module.css';
+import style from './tricky-cat.module.css';
 import classNames from 'classnames';
 import { useEffect, useState, useRef } from 'react';
 

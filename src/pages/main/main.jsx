@@ -15,6 +15,7 @@ import { ValidationsContext } from '../../common/contexts/validations';
 import { Suggestions } from '../../common/components/suggestions/suggestions';
 import { getErrorValidation } from '../../utils/validation';
 import { notify } from '../../utils/notifications/notifications';
+import { TrickyCat } from './tricky-cat';
 
 class MainPageWithoutRoute extends React.Component {
   constructor(props) {
@@ -22,6 +23,9 @@ class MainPageWithoutRoute extends React.Component {
     this.state = {
       searchName: '',
       some: 2,
+      showCatHands: false,
+      catClick: null,
+      catLogo: 'default',
     };
     this.style = classNames.bind(css);
     this.inputRef = React.createRef();
@@ -79,6 +83,10 @@ class MainPageWithoutRoute extends React.Component {
     this.setState({ searchName: suggestion });
   };
 
+  clickOnCatLogo = () => {
+    this.setState({ catClick: Date.now() });
+  };
+
   // Private methods
 
   _search() {
@@ -103,7 +111,7 @@ class MainPageWithoutRoute extends React.Component {
             >
               <form onSubmit={this.onSubmit} className="column is-8">
                 <div className={this.style('columns', 'is-mobile', 'header')}>
-                  <div className="column">
+                  <div className="column" style={{ zIndex: 3 }}>
                     <h1
                       className={this.style(
                         'is-size-1-mobile',
@@ -115,8 +123,18 @@ class MainPageWithoutRoute extends React.Component {
                       meowle
                     </h1>
                   </div>
-                  <div className="column">
-                    <CatLogo size="l"></CatLogo>
+                  <div className={classNames('column', css.catLogoContainer)}>
+                    <CatLogo
+                      size="l"
+                      catType={this.state.catLogo}
+                      onClick={this.clickOnCatLogo}
+                    ></CatLogo>
+                    <TrickyCat
+                      catClick={this.state.catClick}
+                      changeCatImage={() =>
+                        this.setState({ catLogo: 'tricky' })
+                      }
+                    ></TrickyCat>
                   </div>
                 </div>
                 <div>

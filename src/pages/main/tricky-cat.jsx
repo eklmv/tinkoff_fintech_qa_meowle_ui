@@ -32,7 +32,7 @@ export function TrickyCat({ catClick, changeCatImage }) {
       }
       setClicksOnCatCount(0);
     }, 500);
-  }, [catClick]);
+  }, [catClick, changeCatImage, clicksOnCatCount, setShowCatHands]);
 
   const images = new Array(9).fill(
     <img

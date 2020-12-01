@@ -8,6 +8,7 @@ export function CatLogo({
   isRight = true,
   catType = 'default',
   styles = [],
+  onClick = null,
 }) {
   const sizeMap = {
     s: style.small,
@@ -17,6 +18,7 @@ export function CatLogo({
     default: 'cat',
     weary: 'weary-cat',
     modal: 'cat-modal',
+    tricky: 'cat-tricky',
   };
 
   return (
@@ -27,6 +29,7 @@ export function CatLogo({
         sizeMap[size],
         ...styles
       )}
+      onClick={event => onClick && onClick(event)}
     >
       <img
         src={`/img/${catImageMap[catType]}.png`}
@@ -39,6 +42,7 @@ export function CatLogo({
 CatLogo.propTypes = {
   size: PropTypes.oneOf(['s', 'l']),
   isRight: PropTypes.bool,
-  catType: PropTypes.oneOf(['default', 'weary', 'modal']),
+  catType: PropTypes.oneOf(['default', 'weary', 'modal', 'tricky']),
   styles: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func,
 };

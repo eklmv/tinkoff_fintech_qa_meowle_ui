@@ -1,0 +1,210 @@
+.container {
+  position: absolute;
+  right: 118px;
+  width: 300px;
+  height: 128px;
+  align-content: flex-start;
+  transform-origin: 50% 100%;
+  transform: perspective(0px) rotateX(55deg);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.perspective {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hand {
+  position: absolute;
+  width: 20px;
+  width: 6.7%;
+  opacity: 0;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  transition: opacity 1s;
+}
+
+.hand:nth-child(1) {
+  right: 0px;
+  bottom: 5px;
+  bottom: 4%;
+  animation-name: step-hand-1;
+  transform: rotate(200deg);
+}
+
+.hand:nth-child(2) {
+  right: 30px;
+  right: 10%;
+  bottom: 25px;
+  bottom: 19%;
+  animation-name: step-hand-2;
+  transform: rotate(240deg);
+}
+
+.hand:nth-child(3) {
+  right: 62px;
+  right: 20.7%;
+  bottom: 12px;
+  bottom: 9%;
+  animation-name: step-hand-3;
+  transform: rotate(210deg);
+}
+
+.hand:nth-child(4) {
+  right: 93px;
+  right: 31%;
+  bottom: 25px;
+  bottom: 19.5%;
+  animation-name: step-hand-4;
+  transform: rotate(231deg);
+}
+
+
+.hand:nth-child(5) {
+  right: 120px;
+  right: 40%;
+  bottom: 5px;
+  bottom: 4%;
+  animation-name: step-hand-5;
+  transform: rotate(215deg);
+}
+
+.hand:nth-child(6) {
+  right: 149px;
+  right: 49.5%;
+  bottom: 22px;
+  bottom: 17%;
+  animation-name: step-hand-6;
+  transform: rotate(214deg);
+}
+
+.hand:nth-child(7) {
+  right: 178px;
+  right: 59.3%;
+  bottom: 2px;
+  bottom: 1.7%;
+  animation-name: step-hand-7;
+  transform: rotate(214deg);
+}
+
+.hand:nth-child(8) {
+  right: 204px;
+  right: 68%;
+  bottom: 26px;
+  bottom: 20%;
+  animation-name: step-hand-8;
+  transform: rotate(212deg);
+}
+
+.hand:nth-child(9) {
+  right: 230px;
+  right: 76.8%;
+  bottom: 2px;
+  bottom: 1.7%;
+  animation-name: step-hand-9;
+  transform: rotate(200deg);
+}
+
+@media screen and (max-width: 770px) {
+  .container {
+    bottom: 0;
+    height: 128px;
+    width: 200px;
+    bottom: 18px;
+    right: 65px;
+  }
+}
+
+@keyframes step-hand-1 {  
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-2 {   
+  10% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-3 {   
+  20% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-4 {   
+  30% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-5 {   
+  40% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-6 {   
+  50% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-7 {   
+  60% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-8 {   
+  70% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-hand-9 {   
+  80% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 1;
+  }
+}

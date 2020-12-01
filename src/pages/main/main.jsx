@@ -139,7 +139,7 @@ class MainPageWithoutRoute extends React.Component {
                 </div>
                 <div>
                   <div className="field">
-                    <div className="control">
+                    <div className="control" style={{ zIndex: 4 }}>
                       <Suggestions
                         onSelect={this.onSelectSuggestion}
                         inputRef={this.inputRef}

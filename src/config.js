@@ -4,9 +4,9 @@ const local = {
   photosApi: 'http://localhost:3001',
 };
 const production = {
-  catsApi: 'https://meowle.qa-fintech.andrejxz.ru/api/core',
-  reactionApi: 'https://meowle.qa-fintech.andrejxz.ru/api/likes',
-  photosApi: 'https://meowle.qa-fintech.andrejxz.ru/api/photos',
+  catsApi: 'https://meowle-stage.qa-fintech.andrejxz.ru/api/core',
+  reactionApi: 'https://meowle-stage.qa-fintech.andrejxz.ru/api/likes',
+  photosApi: 'https://meowle-stage.qa-fintech.andrejxz.ru/api/photos',
 };
 
 export const urls =

@@ -1,15 +1,5 @@
-const local = {
-  catsApi: 'http://localhost:3003',
-  reactionApi: 'http://localhost:3002',
-  photosApi: 'http://localhost:3001',
+export const urls = {
+  catsApi: process.env.CATS_API_URL,
+  reactionApi: process.env.REACTION_API_URL,
+  photosApi: process.env.PHOTOS_API_URL,
 };
-const production = {
-  catsApi: 'https://meowle.qa-fintech.tcsbank.ru/api/core',
-  reactionApi: 'https://meowle.qa-fintech.tcsbank.ru/api/likes',
-  photosApi: 'https://meowle.qa-fintech.tcsbank.ru/api/photos',
-};
-
-export const urls =
-  process.env.REACT_APP_API_PROD || process.env.NODE_ENV === 'production'
-    ? production
-    : local;

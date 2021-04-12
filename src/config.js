@@ -4,9 +4,9 @@ const local = {
   photosApi: 'http://localhost:3001',
 };
 const production = {
-  catsApi: 'https://meowle.qa-fintech.tcsbank.ru/api/core',
-  reactionApi: 'https://meowle.qa-fintech.tcsbank.ru/api/likes',
-  photosApi: 'https://meowle.qa-fintech.tcsbank.ru/api/photos',
+  catsApi: process.env.REACT_APP_CATS_API_URL,
+  reactionApi: process.env.REACT_APP_REACTION_URL,
+  photosApi: process.env.REACT_APP_PHOTOS_API_URL,
 };
 
 export const urls =

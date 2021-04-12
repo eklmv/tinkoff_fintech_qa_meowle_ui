@@ -1,5 +1,4 @@
 stages:
-  - build
   - publish
   - deploy
 
@@ -9,21 +8,6 @@ variables:
   CONTAINER_PROD_NAME: "cats-ui"
   CONTAINER_QA_NAME: "cats-ui-qa"
 
-build:static:
-  image: node:10.19
-  stage: build
-  before_script:
-    - npm install --production
-  script:
-    - npm run build
-  artifacts:
-    paths:
-    - build/
-    expire_in: 1 week
-  only:
-    - tags
-    - merge_requests
-
 publish:docker-prod:
   image: docker:latest
   stage: publish
@@ -32,10 +16,10 @@ publish:docker-prod:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t $IMAGE_PROD_NAME .
+    - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL_QA --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL_QA --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL_QA -t IMAGE_QA_NAME .
+    - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL -t $IMAGE_PROD_NAME .
     - docker push $IMAGE_PROD_NAME
-  dependencies:
-    - build:static
+    - docker push $IMAGE_QA_NAME
   only:
     - tags
 
@@ -72,6 +56,7 @@ deploy:docker-prod:
     - ssh $USER@$SERVER "(docker rm -f $CONTAINER_PROD_NAME) || true; docker pull $IMAGE_PROD_NAME; docker run -d --name $CONTAINER_PROD_NAME --net=$NETWORK --restart always -p $PROD_PORT:8080 -v $PHOTOS_PATH:/static/photos $IMAGE_PROD_NAME"
   only:
     - tags
+  when: manual
 
 deploy:docker-qa:
   image: docker:latest
@@ -88,6 +73,7 @@ deploy:docker-qa:
   script:
     - ssh $USER@$SERVER "(docker rm -f $CONTAINER_QA_NAME) || true; docker pull $IMAGE_QA_NAME; docker run -d --name $CONTAINER_QA_NAME --net=$NETWORK --restart always -p $QA_PORT:8080 -v $PHOTOS_PATH:/static/photos $IMAGE_QA_NAME"
   only: [merge_requests]
+  when: manual
   except:
     variables:
       - $CI_MERGE_REQUEST_LABELS =~ /without-ci/

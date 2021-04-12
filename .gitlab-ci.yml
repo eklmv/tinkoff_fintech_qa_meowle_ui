@@ -16,29 +16,10 @@ publish:docker-prod:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL_QA --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL_QA --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL_QA -t IMAGE_QA_NAME .
     - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL -t $IMAGE_PROD_NAME .
     - docker push $IMAGE_PROD_NAME
-    - docker push $IMAGE_QA_NAME
   only:
     - tags
-
-publish:docker-qa:
-  image: docker:latest
-  stage: publish
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build --pull -t $IMAGE_QA_NAME .
-    - docker push $IMAGE_QA_NAME
-  dependencies:
-    - build:static
-  only: [merge_requests]
-  except:
-    variables:
-      - $CI_MERGE_REQUEST_LABELS =~ /without-ci/
 
 deploy:docker-prod:
   image: docker:latest

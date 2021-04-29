@@ -27,7 +27,7 @@ export function CatsList({ searchValue }) {
     }
     const apiMethod = searchValue
       ? CatsApi.search(searchValue, gender, order)
-      : CatsApi.getAll(gender, order);
+      : CatsApi.getAllByLetter({ gender, order });
 
     setLoading(true);
     apiMethod
@@ -64,7 +64,7 @@ export function CatsList({ searchValue }) {
 
   return isLoading ? null : error ? (
     <Error />
-  ) : data?.count ? (
+  ) : (data?.count_all || data?.count) ? (
     <Results
       data={data}
       filter={gender}
@@ -122,7 +122,7 @@ function Results({ data, filter, order, onChange }) {
           <div className="columns">
             <div className="column is-2"></div>
             <Filter
-              count={data.count}
+              count={data.count_by_letter}
               filter={filter}
               order={order}
               onChange={onChange}
@@ -159,15 +159,44 @@ Groups.propTypes = {
   groups: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function Group({ group: { title, count, cats } }) {
+function Group({ group: { title, count_by_letter, count_in_group, cats } }) {
+  const [data, dataLoaded] = useState(cats);
+  const [offset, setOffset] = useState(0);
+  const displayArrow = count_by_letter > count_in_group;
+  const start = offset * 5 + 1;
+  const end = Math.min((offset + 1) * 5, count_by_letter);
+  const handleArrowClick = (changeOffsetBy, disabled) => () => {
+    if (disabled) {
+      return;
+    }
+    const newOffset = offset + changeOffsetBy;
+    setOffset(newOffset);
+    CatsApi.getSuggestions(title, 5, newOffset * 5).then((res) => {
+      dataLoaded(res.cats);
+    });
+  }
+  const leftArrowDisabled = offset === 0;
+  const rightArrowDisabled = end === count_by_letter;
   return (
     <div className={style.group}>
       <div className={style.groupHeader}>
         <span className="title is-4">{title}</span>
-        <span className="is-pulled-right has-text-grey is-size-7">{count}</span>
+        <span className="is-pulled-right has-text-grey is-size-7">
+          {displayArrow && `${start === end ? '' : `${start}-`}${end} / `}{count_by_letter}
+        </span>
       </div>
-      <div>
-        <Cats cats={cats} />
+      <div className={style.namesWrapper}>
+        {displayArrow && <span onClick={handleArrowClick(-1, leftArrowDisabled)} className={classNames('tag', 'is-size-5', style.leftArrow, {
+          [style.arrowDisabled]: leftArrowDisabled,
+        })}>
+          {'<'}
+        </span>}
+        <Cats cats={data} />
+        {displayArrow && <span onClick={handleArrowClick(1, rightArrowDisabled)} className={classNames('tag', 'is-size-5', style.rightArrow, {
+          [style.arrowDisabled]: rightArrowDisabled,
+        })}>
+          {'>'}
+        </span>}
       </div>
     </div>
   );

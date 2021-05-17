@@ -21,3 +21,22 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.namesWrapper {
+  display: flex;
+}
+
+.leftArrow {
+  margin-right: .5rem;
+  cursor: pointer;
+}
+
+.rightArrow {
+  margin-left: .5rem;
+  cursor: pointer;
+}
+
+.arrowDisabled {
+  opacity: .5;
+  cursor: not-allowed;
+}

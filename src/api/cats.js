@@ -52,10 +52,11 @@ export class CatsApi {
    * http://meowle.testops.ru:3001/api-docs-ui/#/default/get_cats_search_pattern
    * @param {!string} name Часть имени кота
    * @param {?number=} limit Ограничение количества выходного списка
+   * @param {?number=} Смещение для пагинации
    */
-  static getSuggestions(name, limit) {
+  static getSuggestions(name, limit, offset) {
     return api.get('/cats/search-pattern', {
-      params: { name, limit },
+      params: { name, limit, offset },
     });
   }
 
@@ -82,6 +83,7 @@ export class CatsApi {
   }
 
   /**
+   * @deprecated используйте метод getAllByLetter
    * Получение списка всех имен котов
    * http://meowle.testops.ru:3001/api-docs-ui/#/default/get_cats_all
    * @param {string=} gender Фильтр по полу
@@ -93,6 +95,25 @@ export class CatsApi {
       params: {
         order,
         gender,
+      },
+    });
+  }
+
+  /**
+   * Получение списка всех имен котов, сгруппированных по литерам
+   * http://meowle.testops.ru:3001/api-docs-ui/#/default/get_cats_all_by_letter
+   * @param gender {string=} gender Фильтр по полу
+   * @param order {!string} order Сортировка (asc | desc)
+   * @param page {number} страница
+   * @returns {Promise<Groups>} Промис с группировкой имен котов
+   */
+  static getAllByLetter({ gender, order, page }) {
+    return api.get('/cats/allByLetter', {
+      params: {
+        order,
+        gender,
+        page,
+        limit: 5,
       },
     });
   }

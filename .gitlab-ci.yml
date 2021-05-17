@@ -16,7 +16,7 @@ publish:docker:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL -t $IMAGE_NAME .
+    - docker build --build-arg CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL -t $IMAGE_NAME .
     - docker push $IMAGE_NAME
   only:
     - tags
@@ -29,7 +29,7 @@ publish:docker-stage:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL_STAGE --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL_STAGE --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL_STAGE -t $IMAGE_NAME_STAGE .
+    - docker build --build-arg CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME --build-arg REACT_APP_CATS_API_URL=$REACT_APP_CATS_API_URL_STAGE --build-arg REACT_APP_REACTION_URL=$REACT_APP_REACTION_URL_STAGE --build-arg REACT_APP_PHOTOS_API_URL=$REACT_APP_PHOTOS_API_URL_STAGE -t $IMAGE_NAME_STAGE .
     - docker push $IMAGE_NAME_STAGE
   only:
     - tags

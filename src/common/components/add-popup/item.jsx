@@ -61,9 +61,11 @@ export function Item({ index, isSingle, state, onChange, onRemove }) {
               onChange={onChange}
             />
           </div>
-          <div className={classNames('control', styles['button-remove'], {
-            [styles.hide]: isSingle,
-          })}>
+          <div
+            className={classNames('control', styles['button-remove'], {
+              [styles.hide]: isSingle,
+            })}
+          >
             {buttonActionRemove}
           </div>
         </div>

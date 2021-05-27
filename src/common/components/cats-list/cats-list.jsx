@@ -64,7 +64,7 @@ export function CatsList({ searchValue }) {
 
   return isLoading ? null : error ? (
     <Error />
-  ) : (data?.count_all || data?.count) ? (
+  ) : data?.count_all || data?.count ? (
     <Results
       data={data}
       filter={gender}
@@ -127,6 +127,11 @@ function Results({ data, filter, order, onChange }) {
               order={order}
               onChange={onChange}
             />
+            <div className="column">
+              <div className="is-pulled-right has-text-grey is-size-7">
+                {data.count_all}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -171,10 +176,10 @@ function Group({ group: { title, count_by_letter, count_in_group, cats } }) {
     }
     const newOffset = offset + changeOffsetBy;
     setOffset(newOffset);
-    CatsApi.getSuggestions(title, 5, newOffset * 5).then((res) => {
+    CatsApi.getSuggestions(title, 5, newOffset * 5).then(res => {
       dataLoaded(res.cats);
     });
-  }
+  };
   const leftArrowDisabled = offset === 0;
   const rightArrowDisabled = end === count_by_letter;
   return (
@@ -182,21 +187,32 @@ function Group({ group: { title, count_by_letter, count_in_group, cats } }) {
       <div className={style.groupHeader}>
         <span className="title is-4">{title}</span>
         <span className="is-pulled-right has-text-grey is-size-7">
-          {displayArrow && `${start === end ? '' : `${start}-`}${end} / `}{count_by_letter}
+          {displayArrow && `${start === end ? '' : `${start}-`}${end} / `}
+          {count_by_letter}
         </span>
       </div>
       <div className={style.namesWrapper}>
-        {displayArrow && <span onClick={handleArrowClick(-1, leftArrowDisabled)} className={classNames('tag', 'is-size-5', style.leftArrow, {
-          [style.arrowDisabled]: leftArrowDisabled,
-        })}>
-          {'<'}
-        </span>}
+        {displayArrow && (
+          <span
+            onClick={handleArrowClick(-1, leftArrowDisabled)}
+            className={classNames('tag', 'is-size-5', style.leftArrow, {
+              [style.arrowDisabled]: leftArrowDisabled,
+            })}
+          >
+            {'<'}
+          </span>
+        )}
         <Cats cats={data} />
-        {displayArrow && <span onClick={handleArrowClick(1, rightArrowDisabled)} className={classNames('tag', 'is-size-5', style.rightArrow, {
-          [style.arrowDisabled]: rightArrowDisabled,
-        })}>
-          {'>'}
-        </span>}
+        {displayArrow && (
+          <span
+            onClick={handleArrowClick(1, rightArrowDisabled)}
+            className={classNames('tag', 'is-size-5', style.rightArrow, {
+              [style.arrowDisabled]: rightArrowDisabled,
+            })}
+          >
+            {'>'}
+          </span>
+        )}
       </div>
     </div>
   );

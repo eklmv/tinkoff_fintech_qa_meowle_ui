@@ -10,6 +10,7 @@ import style from './App.module.css';
 import { AddPopup } from './common/components/add-popup/add-popup';
 import { ValidationsContext } from './common/contexts/validations';
 import { CatsApi } from './api/cats';
+import { ImageCarousel } from './pages/profile/components/photos/photos';
 
 function App() {
   let [validationsState, setValidationsState] = useState(null);
@@ -41,6 +42,10 @@ function App() {
                 <MainPage />
                 <AddPopup />
               </Route>
+            </Route>
+            <Route path="/cats/:catId/:imageId">
+              <ProfilePage />
+              <ImageCarousel />
             </Route>
             <Route path="/cats/:catId" component={ProfilePage} />
             <Route path="/all-names">

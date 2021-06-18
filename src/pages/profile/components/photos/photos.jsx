@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useLocation, Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { PhotosApi } from '../../../../api/photos';
 import { notify } from '../../../../utils/notifications/notifications';
 import style from './photos.module.css';
+import history from '../../../../utils/history';
 
 export function Photos({ catId, links: _links }) {
   const [links, updateLinks] = useState(_links);
@@ -38,8 +40,79 @@ Photos.propTypes = {
   links: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
+function onClose(catId) {
+  return function() {
+    history.push(`/cats/${catId}`);
+  }
+}
+
+function loadCatPhotos(id, updateHandler) {
+  return PhotosApi.getCatPhoto(id)
+    .then(links => updateHandler(links))
+    .catch(message => {
+      notify.error(message || 'Ошибка получения фотографий');
+    });
+}
+
+function Modal({ children, onClose, max }) {
+  const showControls = max > 1;
+  const { catId, imageId } = useParams();
+  const goTo = (id) => () => history.push(`/cats/${catId}/${id}`);
+  const next = () => goTo((+imageId + 1) % max)();
+  const prev = () => goTo(imageId == 0 ? max - 1 : +imageId - 1)();
+  const getDots = () => {
+    const dots = [];
+    for (let i = 0; i < max; i++) {
+      dots.push(<div className={classNames(style.dot, { [style.dotActive]: i == imageId })} onClick={goTo(i)}>&#9679;</div>);
+    }
+    return dots;
+  }
+  return (
+    <div className="modal is-clipped is-active">
+      <div className="modal-background" style={{ cursor: 'zoom-out', backgroundColor: 'rgba(255,255,255,.86)' }} onClick={onClose}></div>
+      <div className="modal-card">
+        <section className="modal-card-body" style={{ padding: '0', margin: '0', borderRadius: '20px' }}>{children}</section>
+      </div>
+      <button
+        className="modal-close is-large"
+        aria-label="close"
+        style={{ background: 'lightgray' }}
+        onClick={() => onClose()}
+      />
+      {showControls && <>
+        <div onClick={next} className={style.arrowRight}>&gt;</div>
+        <div onClick={prev} className={style.arrowLeft}>&lt;</div>
+        <div className={style.dots}>{getDots()}</div>
+      </>}
+    </div>
+  );
+}
+
+export function ImageCarousel() {
+  const { catId, imageId } = useParams();
+  const [catPhotos, updateCatPhotos] = useState([]);
+  useEffect(() => {
+    loadCatPhotos(catId, updateCatPhotos);
+  }, [catId]);
+  return (
+    <Modal onClose={onClose(catId)} max={catPhotos.length}>
+      <div
+        className={classNames(style.photoPopup)}
+        onClick={onClose(catId)}
+        style={catPhotos.length !== 0 ? { backgroundImage: `url(${catPhotos[imageId]})` } : {}}
+      ></div>
+    </Modal>
+  );
+}
+
 function PhotoList({ links }) {
-  const photos = links.map((link, i) => <Photo link={link} key={i} />);
+  const { pathname } = useLocation();
+  const photos = links.map((link, i) => (
+      <Link key={i} to={`${pathname}/${i}`}>
+        <Photo link={link} />
+      </Link>
+    )
+  );
 
   return photos;
 }

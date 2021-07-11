@@ -58,13 +58,13 @@
       может работать неправильно
     </div>
     <div class="browsers">
-      <a href="https://www.google.ru/chrome/browser/" target="_blank"
+      <a id="chrome" href="https://www.google.ru/chrome/browser/" target="_blank"
         ><img src="img/unsupported-browser/chrome.png" />Chrome</a
       >
-      <a href="https://www.mozilla.org/ru/firefox/products/" target="_blank"
+      <a id="firefox" href="https://www.mozilla.org/ru/firefox/products/" target="_blank"
         ><img src="img/unsupported-browser/firefox.png" />Firefox</a
       >
-      <a href="http://www.opera.com/" target="_blank"
+      <a id="opera" href="http://www.opera.com/" target="_blank"
         ><img src="img/unsupported-browser/opera.png" />Opera</a
       >
     </div>
@@ -84,6 +84,23 @@
         document.cookie = 'old-browser-check=true;' + expires + ';path=/';
         location.href = location.origin + link;
       }
+
+      function changeLink() {
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf('android') > -1; //&& ua.indexOf("mobile");
+        var isIPhone = ua.indexOf('iphone') > -1; //&& ua.indexOf("mobile");
+        if (isAndroid) {
+          document.getElementById('chrome').href="https://play.google.com/store/apps/details?id=com.android.chrome";
+          document.getElementById('firefox').href="https://play.google.com/store/apps/details?id=org.mozilla.firefox";
+          document.getElementById('opera').href="https://play.google.com/store/apps/details?id=com.opera.browser";
+        }
+        if (isIPhone) {
+          document.getElementById('chrome').href="https://apps.apple.com/ru/app/chrome-%D0%B1%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80-%D0%BE%D1%82-google/id535886823";
+          document.getElementById('firefox').href="https://apps.apple.com/ru/app/%D0%B2%D0%B5%D0%B1-%D0%B1%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80-firefox/id989804926";
+          document.getElementById('opera').href="https://apps.apple.com/ru/app/opera-%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D1%81%D1%82%D1%8C-%D0%B8-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/id1411869974";
+        }
+      }
+      changeLink();
     </script>
   </body>
 </html>

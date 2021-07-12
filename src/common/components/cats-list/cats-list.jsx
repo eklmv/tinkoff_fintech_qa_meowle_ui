@@ -248,10 +248,22 @@ Cat.propTypes = {
 
 function AddCat({ name }) {
   return (
-    <Link to={`/cats/add/${name}`} className="button is-warning is-medium">
-      <span>Добавить&nbsp;</span>
-      <span className="has-text-weight-bold">{name}</span>
-      <span>&nbsp;в базу?</span>
+    <Link
+      to={`/cats/add/${name}`}
+      className="button is-warning is-medium"
+      style={{ display: 'block' }}
+    >
+      <span
+        style={{
+          display: 'block',
+          'text-overflow': 'ellipsis',
+          overflow: 'hidden',
+        }}
+      >
+        <span>Добавить&nbsp;</span>
+        <span className="has-text-weight-bold">{name}</span>
+        <span>&nbsp;в базу?</span>
+      </span>
     </Link>
   );
 }

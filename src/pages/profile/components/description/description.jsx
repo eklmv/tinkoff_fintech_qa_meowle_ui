@@ -30,7 +30,7 @@ function Text({ catId, text }) {
 
   return (
     <>
-      <div>{text || emptyText}</div>
+      <div style={{ 'white-space': 'pre' }}>{text || emptyText}</div>
       <br />
       <Link to={linkTo} className="button is-info is-outlined">
         {buttonTitle}

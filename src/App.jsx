@@ -43,7 +43,7 @@ function App() {
                 <AddPopup />
               </Route>
             </Route>
-            <Route path="/cats/:catId/:imageId">
+            <Route path="/cats/:catId/images/:imageId">
               <ProfilePage />
               <ImageCarousel />
             </Route>

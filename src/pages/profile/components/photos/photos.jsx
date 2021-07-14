@@ -40,9 +40,13 @@ Photos.propTypes = {
   links: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-function onClose(catId) {
+function onClose(catId, search) {
   return function() {
-    history.push(`/cats/${catId}`);
+    if (search.indexOf('backUrl=description') !== -1) {
+      history.push(`/cats/${catId}/edit/description`);
+    } else {
+      history.push(`/cats/${catId}`);
+    }
   }
 }
 
@@ -57,7 +61,7 @@ function loadCatPhotos(id, updateHandler) {
 function Modal({ children, onClose, max }) {
   const showControls = max > 1;
   const { catId, imageId } = useParams();
-  const goTo = (id) => () => history.push(`/cats/${catId}/${id}`);
+  const goTo = (id) => () => history.push(`/cats/${catId}/images/${id}`);
   const next = () => goTo((+imageId + 1) % max)();
   const prev = () => goTo(imageId == 0 ? max - 1 : +imageId - 1)();
   const getDots = () => {
@@ -90,15 +94,16 @@ function Modal({ children, onClose, max }) {
 
 export function ImageCarousel() {
   const { catId, imageId } = useParams();
+  const { search } = useLocation();
   const [catPhotos, updateCatPhotos] = useState([]);
   useEffect(() => {
     loadCatPhotos(catId, updateCatPhotos);
   }, [catId]);
   return (
-    <Modal onClose={onClose(catId)} max={catPhotos.length}>
+    <Modal onClose={onClose(catId, search)} max={catPhotos.length}>
       <div
         className={classNames(style.photoPopup)}
-        onClick={onClose(catId)}
+        onClick={onClose(catId, search)}
         style={catPhotos.length !== 0 ? { backgroundImage: `url(${catPhotos[imageId]})` } : {}}
       ></div>
     </Modal>
@@ -106,9 +111,11 @@ export function ImageCarousel() {
 }
 
 function PhotoList({ links }) {
+  const { catId } = useParams();
   const { pathname } = useLocation();
+  const backUrl = pathname.indexOf('edit/description') !== -1 ? '?backUrl=description' : '';
   const photos = links.map((link, i) => (
-      <Link key={i} to={`${pathname}/${i}`}>
+      <Link key={i} to={`/cats/${catId}/images/${i}${backUrl}`}>
         <Photo link={link} />
       </Link>
     )

@@ -72,7 +72,7 @@ function Info({ catInfo, path, updateInfo }) {
           </div>
           <div className="column">
             <Switch>
-              <Route path={`${path}/edit`}>
+              <Route path={`${path}/edit/description`}>
                 <Title catInfo={catInfo} />
                 <Description
                   className="description"

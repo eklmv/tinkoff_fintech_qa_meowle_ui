@@ -26,7 +26,7 @@ Description.propTypes = {
 function Text({ catId, text }) {
   const emptyText = 'У этого кота нет описания';
   const buttonTitle = (text ? 'Изменить' : 'Добавить') + ' описание';
-  const linkTo = `/cats/${catId}/edit`;
+  const linkTo = `/cats/${catId}/edit/description`;
 
   return (
     <>

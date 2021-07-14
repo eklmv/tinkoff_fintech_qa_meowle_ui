@@ -65,10 +65,25 @@ function Items({ suggestions, onClick }) {
   if (!suggestions || !suggestions.length) {
     return <EmptyItem />;
   }
+  let items = suggestions
+    .slice(0, 10)
+    .map((suggestion, i) => (
+      <Item key={i} text={suggestion} onClick={onClick} />
+    ));
 
-  return suggestions.map((suggestion, i) => (
-    <Item key={i} text={suggestion} onClick={onClick} />
-  ));
+  if (suggestions.length > 10) {
+    items.push(
+      <Item
+        key="11"
+        text="..."
+        onClick={() => {
+          return null;
+        }}
+      />
+    );
+  }
+
+  return items;
 }
 Items.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.string),
@@ -119,7 +134,7 @@ function getSuggestions(name) {
     clearTimeout(getSuggestions._timer);
 
     getSuggestions._timer = setTimeout(() => {
-      resolve(CatsApi.getSuggestions(name));
+      resolve(CatsApi.getSuggestions(name, 11));
     }, SEARCH_DELAY);
   });
 }

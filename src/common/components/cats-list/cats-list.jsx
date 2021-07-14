@@ -72,7 +72,7 @@ export function CatsList({ searchValue }) {
       onChange={changeFilterAndSort}
     />
   ) : searchValue ? (
-    <NoResults text="Упс! Ничего не нашли" name={searchValue} />
+    <NoResultsWithAddButton text="Упс! Ничего не нашли" name={searchValue} />
   ) : null;
 }
 CatsList.propTypes = {
@@ -81,11 +81,11 @@ CatsList.propTypes = {
 
 function Error(searchValue) {
   return (
-    <NoResults text="Ошибка загрузки котов" name={searchValue}></NoResults>
+    <NoResultsWithAddButton text="Ошибка загрузки котов" name={searchValue}></NoResultsWithAddButton>
   );
 }
 
-function NoResults({ text, name }) {
+function NoResultsWithAddButton({ text, name }) {
   console.log(name.length);
   return (
     <section className="section">

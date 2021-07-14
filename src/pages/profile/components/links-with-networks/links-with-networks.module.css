@@ -6,16 +6,6 @@
     font-size: 20px;
 }
 
-.copy-button-wrapper {
-    position: absolute;
-    display: inline-block;
-}
-
 .copy-button {
     height: 25px;
-}
-
-.button-image {
-    margin-left: 15px;
-    position: absolute;
 }

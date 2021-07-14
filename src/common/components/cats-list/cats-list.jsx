@@ -36,7 +36,7 @@ export function CatsList({ searchValue }) {
         setError(null);
       })
       .catch(error => {
-        setError(error || new Error());
+        setError(error || new Error(searchValue));
       })
       .finally(() => {
         setLoading(false);
@@ -79,11 +79,14 @@ CatsList.propTypes = {
   searchValue: PropTypes.string,
 };
 
-function Error() {
-  return <NoResults text="Ошибка загрузки котов"></NoResults>;
+function Error(searchValue) {
+  return (
+    <NoResults text="Ошибка загрузки котов" name={searchValue}></NoResults>
+  );
 }
 
 function NoResults({ text, name }) {
+  console.log(name.length);
   return (
     <section className="section">
       <div className="container">
@@ -100,9 +103,15 @@ function NoResults({ text, name }) {
               <div className="h2 subtitle">{text}</div>
             </div>
             <br />
-            <div className="control has-text-centered">
-              {name.length <= 35 ? <AddCat name={name} /> : null}
-            </div>
+            {name.length <= 35 ? (
+              <div className="control has-text-centered">
+                <AddCat name={name} />{' '}
+              </div>
+            ) : (
+              <div className="control has-text-centered">
+                <div className="h2 subtitle">Имя слишком длинное</div>
+              </div>
+            )}
           </div>
         </div>
       </div>

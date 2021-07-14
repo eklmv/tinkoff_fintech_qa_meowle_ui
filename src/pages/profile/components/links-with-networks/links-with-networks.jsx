@@ -1,6 +1,24 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import style from '../links-with-networks/links-with-networks.module.css';
+import css from '../../../main/main.module.css';
+import { Icon } from '../../../../common/components/icon/icon';
+import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
+
+function copuUrl() {
+  const el = document.createElement('textarea');
+  el.value = window.location.href;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+
+  document.getElementById('button-text').innerText = 'Скопировано';
+
+  const newIcon = <Icon icon={faLock} elementId={'icon'} />;
+  ReactDOM.render(newIcon, document.getElementById('icon'));
+}
 
 export function LinksWithNetworks({}) {
   const url = window.location.href;
@@ -16,7 +34,7 @@ export function LinksWithNetworks({}) {
               <span className={classNames('title', style['title'])}>
                 Поделиться:
               </span>
-              <div>
+              <div className={style['links-container']}>
                 <a
                   href={'https://vk.com/share.php?url=' + url}
                   className={style['link']}
@@ -80,6 +98,19 @@ export function LinksWithNetworks({}) {
                     width={imageSize}
                   />
                 </a>
+                <button
+                  onClick={copuUrl}
+                  className={classNames(
+                    'button',
+                    'is-light',
+                    css.button,
+                    style['copy-button']
+                  )}
+                  type="submit"
+                >
+                  <Icon icon={faUnlock} elementId={'icon'} />
+                  <span id="button-text">Скопировать</span>
+                </button>
               </div>
             </div>
             <br />

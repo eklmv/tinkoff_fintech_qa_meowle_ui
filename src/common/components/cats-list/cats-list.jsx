@@ -118,7 +118,7 @@ function NoResults({ text, name }) {
     </section>
   );
 }
-NoResults.propTypes = {
+NoResultsWithAddButton.propTypes = {
   text: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

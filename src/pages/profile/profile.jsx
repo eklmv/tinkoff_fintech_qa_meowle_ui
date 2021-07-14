@@ -14,6 +14,7 @@ import { PhotosApi } from '../../api/photos';
 import { notify } from '../../utils/notifications/notifications';
 import { ReactionApi } from '../../api/reaction';
 import { storage } from '../../utils/storage';
+import { NoResults } from '../../common/components/no-results/no-result';
 
 export function ProfilePage() {
   const match = useRouteMatch();
@@ -38,7 +39,9 @@ export function ProfilePage() {
       />
       <Photos catId={catInfo.id} links={catPhotos} />
     </>
-  ) : null;
+  ) : (
+    <NoResults text="Упс, ничего не найдено" />
+  );
 
   return (
     <>
@@ -49,7 +52,11 @@ export function ProfilePage() {
 }
 
 function loadCatProfile(id, updateHandler) {
-  return CatsApi.getById(id).then(({ cat }) => updateHandler(cat));
+  return CatsApi.getById(id)
+    .then(({ cat }) => updateHandler(cat))
+    .catch(() => {
+      updateHandler(null);
+    });
 }
 
 function loadCatPhotos(id, updateHandler) {

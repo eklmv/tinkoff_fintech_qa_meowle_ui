@@ -11,6 +11,7 @@ import { AddPopup } from './common/components/add-popup/add-popup';
 import { ValidationsContext } from './common/contexts/validations';
 import { CatsApi } from './api/cats';
 import { ImageCarousel } from './pages/profile/components/photos/photos';
+import { NotFoundPage } from './pages/not-found/not-found';
 
 function App() {
   let [validationsState, setValidationsState] = useState(null);
@@ -55,7 +56,7 @@ function App() {
               <RatingNamesPage />
             </Route>
             <Route path="*">
-              <Redirect to="/" />
+              <NotFoundPage />
             </Route>
           </Switch>
         </Router>

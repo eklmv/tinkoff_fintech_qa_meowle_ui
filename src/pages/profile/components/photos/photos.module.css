@@ -1,95 +1,95 @@
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
 }
 
 .photo {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-radius: 3px;
-    cursor: zoom-in;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  cursor: zoom-in;
 }
 
 .photoPopup {
-    min-width: 500px;
-    min-height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    cursor: zoom-out;
+  min-width: 500px;
+  min-height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: zoom-out;
 }
 
 .arrowRight {
-    position: absolute;
-    left: 90%;
-    display: inline-block;
-    color: gray;
-    font-size: 90px;
-    cursor: pointer;
+  position: absolute;
+  left: 90%;
+  display: inline-block;
+  color: gray;
+  font-size: 90px;
+  cursor: pointer;
 }
 
 .arrowLeft {
-    position: absolute;
-    right: 90%;
-    display: inline-block;
-    color: gray;
-    font-size: 90px;
-    cursor: pointer;
+  position: absolute;
+  right: 90%;
+  display: inline-block;
+  color: gray;
+  font-size: 90px;
+  cursor: pointer;
 }
 
 .dots {
-    position: absolute;
-    bottom: 5%;
+  position: absolute;
+  bottom: 5%;
 }
 
 .dot {
-    display: inline-block;
-    font-size: 30px;
-    margin: 0 10px;
-    cursor: pointer;
-    color: gray;
+  display: inline-block;
+  font-size: 30px;
+  margin: 0 10px;
+  cursor: pointer;
+  color: gray;
 }
 
 .dotActive {
-    cursor: unset;
-    transform: translateY(-2px) scale(1.5);
+  cursor: unset;
+  transform: translateY(-2px) scale(1.5);
 }
 
 .photo.upload {
-    border: 2px solid var(--info-color);
-    cursor: pointer;
-    text-align: center;
+  border: 2px solid var(--info-color);
+  cursor: pointer;
+  text-align: center;
 }
 
 .photo.upload .title {
-    display: block;
-    padding-top: 50%;
-    font-size: 16px;
-    line-height: 0;
-    transition: color .3s;
+  display: block;
+  padding-top: 50%;
+  font-size: 16px;
+  line-height: 0;
+  transition: color 0.3s;
 }
 
 .photo.upload:hover .title {
-    color: var(--grey-light-color);
+  color: var(--grey-light-color);
 }
 
 .photo.upload input[type='file'] {
-    outline: none;
-    opacity: 0;
-    pointer-events: none;
-    user-select: none;
+  outline: none;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .photo.upload label {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
 }

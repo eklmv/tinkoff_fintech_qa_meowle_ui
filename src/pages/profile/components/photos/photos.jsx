@@ -67,15 +67,31 @@ function Modal({ children, onClose, max }) {
   const getDots = () => {
     const dots = [];
     for (let i = 0; i < max; i++) {
-      dots.push(<div className={classNames(style.dot, { [style.dotActive]: i == imageId })} onClick={goTo(i)}>&#9679;</div>);
+      dots.push(
+        <div
+          className={classNames(style.dot, { [style.dotActive]: i == imageId })}
+          onClick={goTo(i)}
+        >
+          &#9679;
+        </div>
+      );
     }
     return dots;
-  }
+  };
   return (
     <div className="modal is-clipped is-active">
-      <div className="modal-background" style={{ cursor: 'zoom-out', backgroundColor: 'rgba(255,255,255,.86)' }} onClick={onClose}></div>
+      <div
+        className="modal-background"
+        style={{ cursor: 'zoom-out', backgroundColor: 'rgba(255,255,255,.86)' }}
+        onClick={onClose}
+      ></div>
       <div className="modal-card">
-        <section className="modal-card-body" style={{ padding: '0', margin: '0', borderRadius: '20px' }}>{children}</section>
+        <section
+          className="modal-card-body"
+          style={{ padding: '0', margin: '0', borderRadius: '20px' }}
+        >
+          {children}
+        </section>
       </div>
       <button
         className="modal-close is-large"
@@ -83,11 +99,17 @@ function Modal({ children, onClose, max }) {
         style={{ background: 'lightgray' }}
         onClick={() => onClose()}
       />
-      {showControls && <>
-        <div onClick={next} className={style.arrowRight}>&gt;</div>
-        <div onClick={prev} className={style.arrowLeft}>&lt;</div>
-        <div className={style.dots}>{getDots()}</div>
-      </>}
+      {showControls && (
+        <>
+          <div onClick={next} className={style.arrowRight}>
+            &gt;
+          </div>
+          <div onClick={prev} className={style.arrowLeft}>
+            &lt;
+          </div>
+          <div className={style.dots}>{getDots()}</div>
+        </>
+      )}
     </div>
   );
 }

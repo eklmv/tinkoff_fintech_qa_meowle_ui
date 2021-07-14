@@ -153,9 +153,6 @@ function Title({ catInfo, updateInfo }) {
       .then(response => {
         updateInfo(response);
       })
-      .catch(message => {
-        notify.error(message);
-      })
       .then(() => {
         const newReaction = reactionType === type ? null : type;
 
@@ -166,6 +163,9 @@ function Title({ catInfo, updateInfo }) {
         } else {
           storage.reactions.remove(catInfo.id);
         }
+      })
+      .catch(() => {
+        notify.error('Ошибка при добавлении лайка/дизлайка');
       })
       .finally(() => {
         setLoading(false);

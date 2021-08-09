@@ -9,6 +9,7 @@ import { CatsApi } from '../../api/cats';
 import { Description } from './components/description';
 import { ReactionButton } from './components/reaction-button/reaction-button';
 import { Photos } from './components/photos/photos';
+import { LinksWithNetworks } from './components/links-with-networks/links-with-networks';
 import style from './profile.module.css';
 import { PhotosApi } from '../../api/photos';
 import { notify } from '../../utils/notifications/notifications';
@@ -38,6 +39,7 @@ export function ProfilePage() {
         updateInfo={updateInfoHandler}
       />
       <Photos catId={catInfo.id} links={catPhotos} />
+      <LinksWithNetworks />
     </>
   ) : (
     <NoResults text="Упс, ничего не найдено" />

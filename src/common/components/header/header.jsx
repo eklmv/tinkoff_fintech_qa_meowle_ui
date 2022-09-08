@@ -68,7 +68,7 @@ export function Header({ searchValue }) {
                   <input
                     type="text"
                     className="input"
-                    placeholder="Введите часть имени"
+                    placeholder=""
                     ref={inputRef}
                     value={searchQuery}
                     onChange={onChangeSearch}

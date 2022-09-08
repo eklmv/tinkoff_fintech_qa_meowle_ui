@@ -149,7 +149,7 @@ class MainPageWithoutRoute extends React.Component {
                         <input
                           type="text"
                           className="input"
-                          placeholder="Введите часть имени"
+                          placeholder=""
                           autoComplete="off"
                           ref={this.inputRef}
                           disabled={!this.context}

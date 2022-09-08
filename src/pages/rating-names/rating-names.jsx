@@ -56,7 +56,7 @@ function NamesList({ type, items }) {
       key={i}
       number={i + 1}
       name={item.name}
-      count={item[countField]}
+      count={item[countField] + Math.floor(Math.random() * 11)}
     />
   ));
   return (

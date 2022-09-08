@@ -18,7 +18,7 @@ const newItemData = {
 
 export function AddPopup() {
   return (
-    <Modal title="Добавить имена в базу котиков" onClose={onClose}>
+    <Modal title="Дабавить имена в базу котиков" onClose={onClose}>
       <ValidationsContext.Consumer>
         {validations => <Form validations={validations} />}
       </ValidationsContext.Consumer>

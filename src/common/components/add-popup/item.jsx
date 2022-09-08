@@ -11,7 +11,7 @@ export function Item({ index, isSingle, state, onChange, onRemove }) {
       type="button"
       className="button is-light"
       disabled={isSingle}
-      onClick={onRemove}
+      // onClick={onRemove}
     >
       <Icon icon={faMinus} />
     </button>

@@ -8,7 +8,7 @@ import { faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 function copuUrl() {
   const el = document.createElement('textarea');
-  el.value = window.location.href;
+  el.value = `${window.location.origin}/null`;
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');
@@ -36,7 +36,8 @@ export function LinksWithNetworks({}) {
               </span>
               <div className={style['links-container']}>
                 <a
-                  href={'https://vk.com/share.php?url=' + url}
+                    href={null}
+                  // href={'https://vk.com/share.php?url=' + url}
                   className={style['link']}
                 >
                   <img src="/img/networks/vk.png" alt="ВК" width={imageSize} />

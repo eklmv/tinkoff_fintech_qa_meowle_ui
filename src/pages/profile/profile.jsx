@@ -115,7 +115,7 @@ Info.propTypes = {
 function Title({ catInfo, updateInfo }) {
   const [loading, setLoading] = useState(false);
   const [reactionType, setReactionType] = useState(
-    (storage.likes.exist(catInfo.id) && 'like') ||
+      (storage.likes.exist(catInfo.id) && 'like') ||
       (storage.dislikes.exist(catInfo.id) && 'dislike') ||
       storage.reactions.exist(catInfo.id)
   );
@@ -160,7 +160,13 @@ function Title({ catInfo, updateInfo }) {
     setLoading(true);
     ReactionApi.likes(catInfo.id, reactions)
       .then(response => {
-        updateInfo(response);
+        if (reactionType === 'dislike') {
+          let tmp = { ...response };
+          tmp.dislikes += 1;
+          updateInfo(tmp);
+        } else {
+          updateInfo(response);
+        }
       })
       .then(() => {
         const newReaction = reactionType === type ? null : type;

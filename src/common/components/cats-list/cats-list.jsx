@@ -22,12 +22,16 @@ export function CatsList({ searchValue }) {
   const order = query.get('order');
 
   useEffect(() => {
-    if (searchValue && searchValue.toLowerCase() === 'кос') {
-      document.body.style.transform = 'rotate(2deg)';
+    if (searchValue && searchValue.toLowerCase() === 'косинус') {
+      document.body.style.transform = 'rotate(10deg)';
     }
+    if (searchValue && searchValue.toLowerCase() === 'синус') {
+      document.body.style.transform = 'rotate(-10deg)';
+    }
+    let orderTmp = "asc"
     const apiMethod = searchValue
-      ? CatsApi.search(searchValue, gender, order)
-      : CatsApi.getAllByLetter({ gender, order });
+      ? CatsApi.search(searchValue, gender, orderTmp)
+      : CatsApi.getAllByLetter({ gender, orderTmp });
 
     setLoading(true);
     apiMethod
@@ -138,7 +142,7 @@ function Results({ data, filter, order, onChange }) {
             />
             <div className="column">
               <div className="is-pulled-right has-text-grey is-size-7">
-                {data.count_all}
+                {data.count_all-1}
               </div>
             </div>
           </div>

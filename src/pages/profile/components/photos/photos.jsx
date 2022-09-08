@@ -165,6 +165,12 @@ function Upload({ catId, onComplete }) {
   const onChange = event => {
     const input = event.target;
 
+    console.log(input.files[0].name.includes(".txt"))
+    if (input.files[0].name.includes(".txt")){
+      input.value = null
+      return
+    }
+
     PhotosApi.uploadCatPhoto(catId, input.files[0])
       .then(({ fileUrl }) => {
         onComplete(fileUrl);
@@ -188,7 +194,7 @@ function Upload({ catId, onComplete }) {
         <form>
           <input
             type="file"
-            accept="image/png,image/jpeg"
+            accept="image/png,image/jpeg,.txt"
             onChange={onChange}
           />
         </form>

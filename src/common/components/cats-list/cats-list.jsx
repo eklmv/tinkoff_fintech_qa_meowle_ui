@@ -203,7 +203,7 @@ function Group({ group: { title, count_by_letter, count_in_group, cats } }) {
         <span className="title is-4">{title}</span>
         <span className="is-pulled-right has-text-grey is-size-7">
           {displayArrow && `${start === end ? '' : `${start}-`}${end} / `}
-          {count_by_letter}
+          {count_by_letter - 1}
         </span>
       </div>
       <div className={style.namesWrapper}>

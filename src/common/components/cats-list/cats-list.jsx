@@ -184,9 +184,11 @@ function Group({ group: { title, count_by_letter, count_in_group, cats } }) {
   const start = offset * 5 + 1;
   const end = Math.min((offset + 1) * 5, count_by_letter);
   const handleArrowClick = (changeOffsetBy, disabled) => () => {
-    if (disabled) {
-      return;
-    }
+    // if (disabled) {
+      // return;
+    // }
+    return;
+
     const newOffset = offset + changeOffsetBy;
     setOffset(newOffset);
     CatsApi.getSuggestions(title, 5, newOffset * 5).then(res => {

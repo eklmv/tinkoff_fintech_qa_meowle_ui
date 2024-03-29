@@ -1,0 +1,37 @@
+{
+  "files": {
+    "0.1c410339.iframe.bundle.js": "./0.1c410339.iframe.bundle.js",
+    "0.1c410339.iframe.bundle.js.map": "./0.1c410339.iframe.bundle.js.map",
+    "1.a5c8529c.iframe.bundle.js": "./1.a5c8529c.iframe.bundle.js",
+    "1.a5c8529c.iframe.bundle.js.map": "./1.a5c8529c.iframe.bundle.js.map",
+    "2.dd4982ec.iframe.bundle.js": "./2.dd4982ec.iframe.bundle.js",
+    "3.ea02e9fa.iframe.bundle.js": "./3.ea02e9fa.iframe.bundle.js",
+    "4.5a735e3a.iframe.bundle.js": "./4.5a735e3a.iframe.bundle.js",
+    "main.css": "./static/css/main.65298fcc.chunk.css",
+    "main.js": "./main.fda1bef0.iframe.bundle.js",
+    "main.css.map": "./static/css/main.65298fcc.chunk.css.map",
+    "runtime~main.js": "./runtime~main.fc4e5bc7.iframe.bundle.js",
+    "vendors~main.js": "./vendors~main.32ee3fad.iframe.bundle.js",
+    "vendors~main.js.map": "./vendors~main.32ee3fad.iframe.bundle.js.map",
+    "8.2bbb17de.iframe.bundle.js": "./8.2bbb17de.iframe.bundle.js",
+    "8.2bbb17de.iframe.bundle.js.map": "./8.2bbb17de.iframe.bundle.js.map",
+    "9.bce03724.iframe.bundle.js": "./9.bce03724.iframe.bundle.js",
+    "10.f1110b9d.iframe.bundle.js": "./10.f1110b9d.iframe.bundle.js",
+    "11.bd849600.iframe.bundle.js": "./11.bd849600.iframe.bundle.js",
+    "11.bd849600.iframe.bundle.js.map": "./11.bd849600.iframe.bundle.js.map",
+    "0.1c410339.iframe.bundle.js.LICENSE.txt": "./0.1c410339.iframe.bundle.js.LICENSE.txt",
+    "1.a5c8529c.iframe.bundle.js.LICENSE.txt": "./1.a5c8529c.iframe.bundle.js.LICENSE.txt",
+    "11.bd849600.iframe.bundle.js.LICENSE.txt": "./11.bd849600.iframe.bundle.js.LICENSE.txt",
+    "8.2bbb17de.iframe.bundle.js.LICENSE.txt": "./8.2bbb17de.iframe.bundle.js.LICENSE.txt",
+    "iframe.html": "./iframe.html",
+    "precache-manifest.56235064b60f8522ecb28faf6e933002.js": "./precache-manifest.56235064b60f8522ecb28faf6e933002.js",
+    "service-worker.js": "./service-worker.js",
+    "vendors~main.32ee3fad.iframe.bundle.js.LICENSE.txt": "./vendors~main.32ee3fad.iframe.bundle.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "runtime~main.fc4e5bc7.iframe.bundle.js",
+    "vendors~main.32ee3fad.iframe.bundle.js",
+    "static/css/main.65298fcc.chunk.css",
+    "main.fda1bef0.iframe.bundle.js"
+  ]
+}

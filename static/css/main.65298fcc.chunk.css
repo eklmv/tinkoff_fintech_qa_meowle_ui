@@ -1,0 +1,22 @@
+.cat-logo_small__2EHTx {
+  width: 64px;
+  height: 64px;
+}
+
+.cat-logo_large__XfH28 {
+  width: 100%;
+  width: 128px;
+  height: 128px;
+}
+
+@media screen and (max-width: 770px) {
+  .cat-logo_large__XfH28 {
+    width: 100%;
+    height: 100%;
+    max-width: 64px;
+    max-height: 64px;
+  }
+}
+
+
+/*# sourceMappingURL=main.65298fcc.chunk.css.map*/

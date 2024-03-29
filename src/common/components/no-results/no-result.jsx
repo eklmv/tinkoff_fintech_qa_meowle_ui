@@ -10,7 +10,7 @@ export function NoResults({ text }) {
             <div className="level">
               <div className="level-item">
                 <figure className="image is-64x64">
-                  <img src="/img/weary-cat.png" alt="" />
+                  <img src="img/weary-cat.png" alt="" />
                 </figure>
               </div>
             </div>

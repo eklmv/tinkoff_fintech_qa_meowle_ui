@@ -32,7 +32,7 @@ export function CatLogo({
       onClick={event => onClick && onClick(event)}
     >
       <img
-        src={`/img/${catImageMap[catType]}.png`}
+        src={`img/${catImageMap[catType]}.png`}
         alt=""
         data-autotest-id="cat-logo"
       />

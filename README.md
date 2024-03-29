@@ -1,3 +1,8 @@
+# Forked from https://gitlab.com/meowle/cats-ui
+## Домашняя работа Тинькофф Финтех: QA Engineer (Web), весна 2024
+Требует старую версию `node`, я использовал `node v13.14.0`.
+Если вы используте [nix](https://github.com/NixOS/nix), то будет достаточно вызвать `nix-shell`.
+
 ## Ссылки приложения
 
 http://meowle.qa-fintech.tcsbank.ru

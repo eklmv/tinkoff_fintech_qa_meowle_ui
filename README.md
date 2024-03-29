@@ -2,6 +2,11 @@
 ## Домашняя работа Тинькофф Финтех: QA Engineer (Web), весна 2024
 Требует старую версию `node`, я использовал `node v13.14.0`.
 Если вы используте [nix](https://github.com/NixOS/nix), то будет достаточно вызвать `nix-shell`.
+## Storybook
+Storybook опубликован на [github pages](https://eklmv.github.io/tinkoff_fintech_qa_meowle_ui/).
+
+<details>
+<summary>Оригинальный README</summary>
 
 ## Ссылки приложения
 
@@ -43,3 +48,4 @@ http://meowle.qa-fintech.tcsbank.ru
 
 Дополнительно:
 - Если не нужно запускать деплой на QA стенд при создании MR - необходимо добавить лейбл `without-ci` 
+</details>

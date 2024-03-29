@@ -13,7 +13,9 @@
     "version": "node scripts/update-version.js",
     "lint:format:fix": "prettier --config ./.prettierrc.yml \"src/**/*.{js,jsx,json,css,md}\" --write",
     "codecept:run:local": "concurrently -k --success=\"first\" \"BROWSER=none npm run start:prod-api\" \"wait-on http://localhost:3000 && codeceptjs run --config codecept_config/codecept.conf.local.js\"",
-    "codecept:run:cli": "REACT_APP_UI_PROD=true codeceptjs run --config codecept_config/codecept.conf.cli.js"
+    "codecept:run:cli": "REACT_APP_UI_PROD=true codeceptjs run --config codecept_config/codecept.conf.cli.js",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.27",
@@ -30,6 +32,16 @@
     "react-scripts": "^3.4.3"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack4": "^6.5.16",
+    "@storybook/manager-webpack4": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.7",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.3.2",
     "@testing-library/user-event": "7.1.2",
@@ -43,7 +55,17 @@
     "wait-on": "^5.2.0"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [

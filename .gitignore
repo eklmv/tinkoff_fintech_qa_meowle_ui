@@ -23,3 +23,7 @@
 
 /.idea
 npm-debug.log*
+
+# direnv and nix
+.direnv/
+.envrc
